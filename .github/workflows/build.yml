@@ -19,17 +19,9 @@ jobs:
 
       - run: pip install flet-cli
 
-      - name: Setup project structure
-        run: |
-          mkdir -p src
-          cp main.py src/main.py
-          ls -la src/
+      - run: flet build apk --yes
 
-      - name: Build APK
-        run: flet build apk --yes
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: SmartHome-APK
