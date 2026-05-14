@@ -1,42 +1,40 @@
 name: Build Android APK
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 下载代码
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 安装 Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.6'
+          channel: 'stable'
 
-      - name: 安装 Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 安装 Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: 安装 Flet
-        run: |
-          pip install flet flet-cli
+      - run: pip install flet-cli
 
-      - name: 打包 APK
+      - name: Build APK
         run: |
-          flet build apk main.py
+          flutter --version
+          flet build apk --yes main.py
+        env:
+          FLET_FLUTTER_ROOT: ${{ env.FLUTTER_ROOT }}
 
-      - name: 上传 APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: SmartHome-APK
-          path: build/apk/**/*.apk
+          path: build/**/*.apk
+          if-no-files-found: warn
