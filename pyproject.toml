@@ -1,0 +1,13 @@
+[project]
+name = "smart_home"
+version = "1.0.0"
+description = "智能家居控制App"
+
+[tool.flet]
+org = "com.yourcompany"
+
+[tool.flet.android]
+permissions = ["INTERNET", "ACCESS_NETWORK_STATE"]
+
+[tool.flet.app]
+path = "main.py"
