@@ -19,18 +19,14 @@ jobs:
 
       - run: pip install flet-cli
 
-      - name: Check files
-        run: |
-          pwd
-          ls -la
-
-      - name: Create src structure
+      - name: Setup project structure
         run: |
           mkdir -p src
           cp main.py src/main.py
+          ls -la src/
 
       - name: Build APK
-        run: flet build apk --yes --module-name main src/
+        run: flet build apk --yes
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
