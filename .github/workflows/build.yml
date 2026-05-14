@@ -19,11 +19,10 @@ jobs:
 
       - run: pip install flet-cli
 
-      - name: Check files
-        run: ls -la
+      - run: ls -la
 
       - name: Build APK
-        run: flet build android --yes
+        run: flet build apk . --yes --module-name main
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
