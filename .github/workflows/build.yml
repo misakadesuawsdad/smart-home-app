@@ -28,17 +28,22 @@ jobs:
 
       - name: Build APK
         run: |
-          cd $GITHUB_WORKSPACE
-          ls -la
           flutter config --no-analytics
-          flet build apk --yes
+          flet build apk --yes --verbose
         env:
           FLET_FLUTTER_ROOT: ${{ env.FLUTTER_ROOT }}
+
+      - name: List build output
+        run: |
+          find . -name "*.apk" -type f
+          ls -la build/ || true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: SmartHome-APK
-          path: build/**/*.apk
+          path: |
+            build/app/outputs/flutter-apk/**/*.apk
+            build/**/*.apk
           if-no-files-found: warn
