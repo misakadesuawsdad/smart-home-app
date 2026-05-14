@@ -14,3 +14,6 @@ android.minapi = 21
 android.ndk = 25b
 android.sdk = 33
 android.archs = arm64-v8a, armeabi-v7a
+
+# 新增这一行！自动接受SDK许可证
+android.accept_sdk_license = True
