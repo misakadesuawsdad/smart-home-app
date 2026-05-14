@@ -22,12 +22,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - run: pip install flet-cli
+      - run: |
+          pip install flet-cli
+          flet --version
 
       - name: Build APK
         run: |
-          flutter --version
-          flet build apk --yes main.py
+          cd $GITHUB_WORKSPACE
+          ls -la
+          flutter config --no-analytics
+          flet build apk --yes
         env:
           FLET_FLUTTER_ROOT: ${{ env.FLUTTER_ROOT }}
 
