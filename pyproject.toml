@@ -2,5 +2,8 @@
 name = "smart_home"
 version = "1.0.0"
 
+[tool.flet.app]
+path = "main.py"
+
 [tool.flet.android]
 permissions = ["INTERNET", "ACCESS_NETWORK_STATE"]
